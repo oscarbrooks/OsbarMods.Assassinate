@@ -1,0 +1,62 @@
+<Prefab>
+    <Variables>
+    </Variables>
+    <VisualDefinitions>
+        <VisualDefinition Name="BottomMenu">
+            <VisualState PositionYOffset="0" State="Default" />
+        </VisualDefinition>
+    </VisualDefinitions>
+    <Window>
+        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" Brush="Frame1Brush">
+            <Children>
+                <Widget DoNotAcceptEvents="true" WidthSizePolicy = "Fixed" HeightSizePolicy = "Fixed" SuggestedHeight="700" SuggestedWidth="1200" MarginTop="50" HorizontalAlignment="Center" Brush="Recruitment.Frame">
+                    <Children>
+                        <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" HorizontalAlignment="Center" Brush="CenterAlignedLargeFont" VerticalAlignment="Top" MarginTop="65" Text="Assassinate" />
+
+                        <Widget DoNotAcceptEvents="true" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" MarginRight="30" MarginLeft="30" MarginTop="20">
+                            <Children>
+                                <ScrollablePanel Id="ScrollablePanel" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" MarginLeft="10" AutoHideScrollBars="true" ClipRect="ClipRect" InnerPanel="ClipRect\AssassinationTargets" HorizontalScrollbar="..\HorizontalScrollbar">
+                                    <Children>
+                                        <Widget Id="ClipRect" WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" ClipContents="true" MarginLeft="-10">
+                                            <Children>
+                                                <!--Assassination Targets List-->
+                                                <ListPanel Id="AssassinationTargets" DataSource="{AssassinationTargets}" WidthSizePolicy="CoverChildren" HeightSizePolicy="CoverChildren" HorizontalAlignment="Left" MarginLeft="20" MarginTop="120" LayoutImp.LayoutMethod="HorizontalLeftToRight">
+                                                    <ItemTemplate>
+                                                        <Widget WidthSizePolicy="Fixed" HeightSizePolicy="CoverChildren" SuggestedWidth="194" SuggestedHeight="160" MarginRight="30" Brush="Frame1Brush">
+                                                            <Children>
+                                                                <!--Hero Clan Banner-->
+                                                                <!-- <MaskedTextureWidget DataSource="{ClanBanner_9}" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="!Banner.Width.Scaled" SuggestedHeight="!Banner.Height.Scaled" HorizontalAlignment="Right" VerticalAlignment="Top" PositionYOffset="-5" PositionXOffset="5" Brush="Flat.Tuple.Banner.Smaller.Hero" AdditionalArgs="@AdditionalArgs" ImageId="@Id" ImageTypeCode="@ImageTypeCode" IsDisabled="true" OverlayTextureScale="2.2" /> -->
+                                                                <ImageIdentifierWidget DataSource="{ImageIdentifier}" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="104" SuggestedHeight="75" MarginTop="20" AdditionalArgs="@AdditionalArgs" ImageId="@Id" ImageTypeCode="@ImageTypeCode" HorizontalAlignment="Center" />
+                                                                <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="130" Text="@NameText" />
+                                                                <ButtonWidget DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="80" SuggestedHeight="30" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="160" MarginBottom="20" Brush="ButtonBrush1" Command.Click="OnSneakIn">
+                                                                    <Children>
+                                                                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" Brush="CenterAlignedSmallFont" VerticalAlignment="Bottom" Text="Sneak in" />
+                                                                    </Children>
+                                                                </ButtonWidget>
+                                                            </Children>
+                                                        </Widget>
+                                                    </ItemTemplate>
+                                                </ListPanel>
+                                            </Children>
+                                        </Widget>
+                                    </Children>
+                                </ScrollablePanel>
+
+                                <ScrollbarWidget Id="HorizontalScrollbar" WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="8" HorizontalAlignment="Center" VerticalAlignment="Center" MarginTop="40" MarginRight="10" MarginBottom="15" AlignmentAxis="Horizontal" Handle="HorizontalScrollbarHandle" MaxValue="100" MinValue="0">
+                                    <Children>
+                                        <Widget WidthSizePolicy="StretchToParent" HeightSizePolicy="Fixed" SuggestedHeight="4" VerticalAlignment="Center" Sprite="BlankWhiteSquare_9" Brush.AlphaFactor="0.2" Brush.Color="#5a4033FF" />
+                                        <ImageWidget Id="HorizontalScrollbarHandle" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="8" SuggestedHeight="10" HorizontalAlignment="Center" Brush="FaceGen.Scrollbar.Handle" />
+                                    </Children>
+                                </ScrollbarWidget>
+                            </Children>
+                        </Widget>
+
+                        <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" HorizontalAlignment="Left" VerticalAlignment="Top" MarginLeft="210" MarginTop="430" Text="@SneakInPercentageText" />
+                    </Children>
+                </Widget>
+
+                <Standard.DialogCloseButtons VisualDefinition="BottomMenu" Parameter.DoneButtonAction="OnCloseMenu" PositionYOffset="100" Parameter.DoneButtonText="Leave" Parameter.ShowCancel="false" />
+            </Children>
+        </Widget>
+    </Window>
+</Prefab>
