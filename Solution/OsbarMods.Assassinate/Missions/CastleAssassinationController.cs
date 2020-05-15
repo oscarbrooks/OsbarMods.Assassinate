@@ -25,6 +25,8 @@ namespace OsbarMods.Assassinate.Missions
         public override void OnBehaviourInitialize()
         {
             _missionAgentHandler = this.Mission.GetMissionBehaviour<MissionAgentHandler>();
+
+            Mission.IsFriendlyMission = false;
         }
 
         public override void AfterStart()

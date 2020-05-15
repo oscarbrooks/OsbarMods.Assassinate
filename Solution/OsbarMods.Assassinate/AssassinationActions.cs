@@ -83,7 +83,7 @@ namespace OsbarMods.Assassinate
                 throw new NotImplementedException("Assassinating members of the same clan is not supported.");
             }
 
-            if (assassin.Clan.Kingdom == victim.Clan.Kingdom)
+            if (assassin.Clan.Kingdom != null && assassin.Clan.Kingdom == victim.Clan.Kingdom)
             {
                 if(assassin.IsFactionLeader)
                 {

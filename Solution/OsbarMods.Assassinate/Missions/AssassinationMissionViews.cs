@@ -24,8 +24,6 @@ namespace OsbarMods.Assassinate.Missions
 				ViewCreator.CreateMissionMainAgentEquipmentController(mission),
 				new MusicSilencedMissionView(),
 				SandBoxViewCreator.CreateMissionBarterView(),
-				ViewCreator.CreateMissionLeaveView(),
-				SandBoxViewCreator.CreateBoardGameView(),
 				SandBoxViewCreator.CreateMissionNameMarkerUIHandler(mission),
 				new MissionItemContourControllerView(),
 				new MissionAgentContourControllerView(),

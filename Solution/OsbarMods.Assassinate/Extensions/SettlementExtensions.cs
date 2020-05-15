@@ -24,7 +24,7 @@ namespace OsbarMods.Assassinate.Extensions
         {
             return settlement
                 .GetHerosInLordsHall()
-                .Where(h => h.Clan.Leader != assassin && h.Clan.Kingdom.Leader != assassin);
+                .Where(h => h.Clan.Leader != assassin && (h.Clan.Kingdom == null || h.Clan.Kingdom.Leader != assassin));
         }
     }
 }

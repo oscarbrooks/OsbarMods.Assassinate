@@ -5,13 +5,13 @@ namespace OsbarMods.Assassinate
 {
     public class MissionLoader : IMissionLoader
     {
-        private readonly IMissionOutcomeEvents _missionOutcomeHandler;
+        private readonly IMissionOutcomeHandler _missionOutcomeHandler;
         private readonly IAssassinationActions _assassinationActions;
         private readonly IEncounterProvider _encounterProvider;
         private readonly IDialogProvider _dialogProvider;
         private readonly ILocationCharacterProvider _locationCharacterProvider;
 
-        public MissionLoader(IMissionOutcomeEvents missionOutcomeHandler,
+        public MissionLoader(IMissionOutcomeHandler missionOutcomeHandler,
             IAssassinationActions assassinationActions,
             IEncounterProvider encounterProvider,
             IDialogProvider dialogProvider,

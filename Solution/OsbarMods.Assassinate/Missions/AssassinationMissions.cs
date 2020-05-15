@@ -3,6 +3,7 @@ using SandBox.Source.Missions;
 using SandBox.Source.Missions.Handlers;
 using SandBox.Source.Missions.Handlers.Logic;
 using System.Collections.Generic;
+using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.GameMenus;
 using TaleWorlds.MountAndBlade;
@@ -19,7 +20,7 @@ namespace OsbarMods.Assassinate.Missions
             IEncounterProvider encounterProvider,
             ILocationCharacterProvider locationCharacterProvider,
             IDialogProvider dialogProvider,
-            IMissionOutcomeEvents missionOutcomeHandler,
+            IMissionOutcomeHandler missionOutcomeHandler,
             IAssassinationActions assassinationActions,
             Settlement settlement,
             Hero assassinationTarget,
@@ -40,8 +41,8 @@ namespace OsbarMods.Assassinate.Missions
                 new MissionOptionsComponent(),
                 new CampaignMissionComponent(),
                 new MissionBasicTeamLogic(),
-                new BasicLeaveMissionLogic(),// maybe implement own
-                new LeaveMissionLogic(),//maybe implement own
+                //new BasicLeaveMissionLogic(),// maybe implement own
+                //new LeaveMissionLogic(),//maybe implement own
                 new MissionAgentLookHandler(),
                 new MissionConversationHandler(),
                 new MissionAgentHandler(locationToOpen, null),
@@ -51,9 +52,9 @@ namespace OsbarMods.Assassinate.Missions
                 new AgentTownAILogic(),//not sure, maybe implement my own version
                 new MissionCrimeHandler(),// maybe keep
                 new MissionFacialAnimationHandler(),
-                new MissionDebugHandler(),
-                new LocationItemSpawnHandler(),// remove?
-                new VisualTrackerMissionBehavior(),
+                //new MissionDebugHandler(),
+                //new LocationItemSpawnHandler(),// remove?
+                //new VisualTrackerMissionBehavior(),
                 new CastleAssassinationController(locationCharacterProvider, assassinationTarget, sneakInSuccessful),
                 new AssassinationOutcomeLogic(missionOutcomeHandler, assassinationActions, settlement, assassinationTarget, sneakInSuccessful),
                 new AssassinationConversationLogic(dialogProvider, Campaign.Current.ConversationManager, assassinationTarget.CharacterObject, sneakInSuccessful)
@@ -64,7 +65,13 @@ namespace OsbarMods.Assassinate.Missions
                 missionBehaviors.Add(new AssassinationCaughtByGuardsLogic(locationCharacterProvider, Campaign.Current.ConversationManager, settlement, assassinationTarget));
             }
 
-            missionOutcomeHandler.PlayerAssassinationFailed += (settl, ass) => {
+            // Hacky way to disable exiting via the doors - I don't know how to lock the doors yet
+            var cachedLocations = locationToOpen.LocationsOfPassages.ToList();
+
+            locationToOpen.LocationsOfPassages.Clear();
+
+            // I don't think I like this
+            missionOutcomeHandler.Initialise((settl, ass) => {
                 OpenCapturedConversation(
                     encounterProvider,
                     dialogProvider,
@@ -72,7 +79,10 @@ namespace OsbarMods.Assassinate.Missions
                     settl,
                     ass
                 );
-            };
+            },
+            () => {
+                locationToOpen.LocationsOfPassages.AddRange(cachedLocations);
+            });
 
             return MissionState.OpenNew("CastleAssassination", missionRecord, (Mission mission) => missionBehaviors, true, true, true);
         }

@@ -14,7 +14,7 @@ namespace OsbarMods.Assassinate
             container.Register<ILocationCharacterProvider, LocationCharacterProvider>();
 
             container.RegisterSingleton<IAssassinationHistoryService, AssassinationHistoryService>();
-            container.RegisterSingleton<IMissionOutcomeEvents, MissionOutcomeEvents>();
+            container.RegisterSingleton<IMissionOutcomeHandler, MissionOutcomeHandler>();
             container.RegisterSingleton<IAssassinationActions, AssassinationActions>();
 
             return container;

@@ -297,9 +297,8 @@
     <Compile Include="LocationCharacterProvider.cs" />
     <Compile Include="MissionLoader.cs" />
     <Compile Include="IAssassinationActions.cs" />
-    <Compile Include="Missions\IMissionOutcomeEvents.cs" />
-    <Compile Include="Missions\MissionOutcomeEvents.cs" />
-    <Compile Include="Missions\PlayerAssassinationFailedDelegate.cs" />
+    <Compile Include="Missions\IMissionOutcomeHandler.cs" />
+    <Compile Include="Missions\MissionOutcomeHandler.cs" />
     <Compile Include="SettlementAssassinateScreen.cs" />
     <Compile Include="SettlementAssassinateScreenViewModel.cs" />
     <Compile Include="Main.cs" />

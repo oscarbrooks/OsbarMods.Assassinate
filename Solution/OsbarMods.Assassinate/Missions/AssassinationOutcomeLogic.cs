@@ -6,7 +6,7 @@ namespace OsbarMods.Assassinate.Missions
 {
     public class AssassinationOutcomeLogic : MissionLogic
     {
-        private readonly IMissionOutcomeEvents _missionOutcomeHandler;
+        private readonly IMissionOutcomeHandler _missionOutcomeHandler;
         private readonly IAssassinationActions _assassinationActions;
         private readonly Settlement _settlement;
         private readonly Hero _assassinationTarget;
@@ -21,7 +21,7 @@ namespace OsbarMods.Assassinate.Missions
 
         private bool _guardsAcceptedBribe = false;
 
-        public AssassinationOutcomeLogic(IMissionOutcomeEvents missionOutcomeHandler, IAssassinationActions assassinationActions, Settlement settlement, Hero assassinationTarget, bool sneakInSuccessful)
+        public AssassinationOutcomeLogic(IMissionOutcomeHandler missionOutcomeHandler, IAssassinationActions assassinationActions, Settlement settlement, Hero assassinationTarget, bool sneakInSuccessful)
         {
             _missionOutcomeHandler = missionOutcomeHandler;
             _assassinationActions = assassinationActions;
@@ -71,6 +71,8 @@ namespace OsbarMods.Assassinate.Missions
         public void DoEndMissionUpdates()
         {
             if (!_assassinationTarget.HasMet) _assassinationTarget.HasMet = true;
+
+            _missionOutcomeHandler.OnMissionEnded();
         }
 
         public void OnAssassinationFightEnded(bool didWin)
@@ -102,9 +104,6 @@ namespace OsbarMods.Assassinate.Missions
 
         private void OnTargetAssassinated()
         {
-            // don't need to listen for player defeated
-            _missionOutcomeHandler.ClearListeners();
-
             _assassinationActions.ApplySuccessfulAssassination(_settlement, Hero.MainHero, _assassinationTarget);
 
             CampaignEvents.GameMenuOpened.AddNonSerializedListener(this, args =>

@@ -40,10 +40,6 @@ namespace OsbarMods.Assassinate.Missions
             _missionAgentHandler = Mission.GetMissionBehaviour<MissionAgentHandler>();
         }
 
-        public override void AfterStart()
-        {
-        }
-
         public override void OnMissionTick(float dt)
         {
             if (_conversationStarted || _conversationManager.Handler == null) return;
@@ -54,16 +50,16 @@ namespace OsbarMods.Assassinate.Missions
 
         private void SpawnGuards()
         {
-            var clan = _settlement.OwnerClan;
-
-            var basicTroop = clan.BasicTroop;
+            var troop = _assassinationTarget.Clan.IsMinorFaction ? _assassinationTarget.Clan.BasicTroop : _settlement.Culture.EliteBasicTroop;
 
             var guardTiers = GetGuardTiers(_assassinationTarget);
 
-            var characterList = Enumerable.Range(0, 3)
+            var numberOfGuards = _assassinationTarget.Clan.IsMinorFaction ? 2 : 3;
+
+            var characterList = Enumerable.Range(0, numberOfGuards)
                 .Select(i =>
                 {
-                    var guard = _locationCharacterProvider.GetRandomFromTroopTree(clan.Culture.EliteBasicTroop, guardTiers.Item1, guardTiers.Item2);
+                    var guard = _locationCharacterProvider.GetRandomFromTroopTree(troop, guardTiers.Item1, guardTiers.Item2);
 
                     guard.CharacterRelation = LocationCharacter.CharacterRelations.Enemy;
 
