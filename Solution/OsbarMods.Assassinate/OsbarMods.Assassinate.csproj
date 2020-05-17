@@ -277,7 +277,6 @@
     <Compile Include="AssassinationHistoryService.cs" />
     <Compile Include="Extensions\HeroExtensions.cs" />
     <Compile Include="IAssassinationHistoryService.cs" />
-    <Compile Include="Missions\AssassinationCapturedConversationLogic.cs" />
     <Compile Include="Missions\AssassinationCaughtByGuardsLogic.cs" />
     <Compile Include="Missions\AssassinationConversationLogic.cs" />
     <Compile Include="Missions\AssassinationMissions.cs" />
@@ -305,7 +304,7 @@
     <Compile Include="AssassinationBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettlementAssassinationHistory.cs" />
-    <Compile Include="SimpleCharacterPanelVM.cs" />
+    <Compile Include="AssassinationCharacterPanel.cs" />
     <Compile Include="SneakInHandler.cs" />
   </ItemGroup>
   <ItemGroup>

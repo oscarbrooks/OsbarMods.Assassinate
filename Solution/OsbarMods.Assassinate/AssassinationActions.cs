@@ -27,9 +27,9 @@ namespace OsbarMods.Assassinate
 
             TakeHeroCaptive(settlement, assassin, out var takeCaptiveMessage);
 
-            var message = goldLossMessage
-                + declareWarMessage
-                + takeCaptiveMessage;
+            var message = goldLossMessage.ToString()
+                + $"\n{declareWarMessage}"
+                + $"\n{takeCaptiveMessage}";
 
             var inquiry = new InquiryData(
                 "Captured",
@@ -60,7 +60,8 @@ namespace OsbarMods.Assassinate
             if (party != null) party.MobileParty.RemoveParty();
 
             KillCharacterAction.ApplyByMurder(victim);
-            InformationManager.AddQuickInformation(new TextObject($"{victim.Name} has been assassinated."));
+
+            PrintAssassinatedText(victim);
 
             _assassinationHistoryService.AddAssassinationEvent(new AssassinationEvent()
             {
@@ -70,6 +71,15 @@ namespace OsbarMods.Assassinate
                 Succeeded = true,
                 CampaignTime = CampaignTime.Now
             });
+        }
+
+        private void PrintAssassinatedText(Hero victim)
+        {
+            var assassinatedText = new TextObject("{=5vbPC4NI}{VICTIM_NAME} has been assassinated.");
+
+            assassinatedText.SetTextVariable("VICTIM_NAME", victim.Name.ToString());
+
+            InformationManager.AddQuickInformation(assassinatedText);
         }
 
         private static void DeclareWarBetweenHeros(Hero assassin, Hero victim, out string declareWarMessage)
@@ -98,7 +108,7 @@ namespace OsbarMods.Assassinate
             GameTexts.SetVariable("FACTION1_NAME", victim.MapFaction.Name);
             GameTexts.SetVariable("FACTION2_NAME", assassin.MapFaction.Name);
 
-            declareWarMessage = "\n" + GameTexts.FindText("str_factions_declare_war_news", null).ToString();
+            declareWarMessage = $"\n{GameTexts.FindText("str_factions_declare_war_news", null)}.";
         }
 
         private static void TakeGoldFromHero(Hero hero, Clan captorClan, out string goldLossMessage)
@@ -120,7 +130,12 @@ namespace OsbarMods.Assassinate
             PartyBase.MainParty.AddElementToMemberRoster(hero.CharacterObject, -1, true);
             TakePrisonerAction.Apply(settlement.Party, hero);
 
-            takeCaptiveMessage = $"\n{hero.FirstName} is being held prisoner at {settlement.Name}";
+            var message = new TextObject("{=AqBsz5xT}{CAPTIVE_HERO_NAME} is being held prisoner at {SETTLEMENT_NAME}.");
+
+            message.SetTextVariable("CAPTIVE_HERO_NAME", hero.FirstName);
+            message.SetTextVariable("SETTLEMENT_NAME", settlement.Name);
+
+            takeCaptiveMessage = message.ToString();
         }
     }
 }

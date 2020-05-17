@@ -3,10 +3,11 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.ViewModelCollection;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace OsbarMods.Assassinate
 {
-    public class SimpleCharacterPanelVM : ViewModel
+    public class AssassinationCharacterPanel : ViewModel
     {
         private Hero _hero;
 
@@ -16,7 +17,7 @@ namespace OsbarMods.Assassinate
 
         private Action<Hero> _onSneakIn;
 
-        public SimpleCharacterPanelVM(Hero hero, Action<Hero> onSneakIn)
+        public AssassinationCharacterPanel(Hero hero, Action<Hero> onSneakIn)
         {
             Hero = hero;
 
@@ -80,6 +81,9 @@ namespace OsbarMods.Assassinate
                 }
             }
         }
+
+        [DataSourceProperty]
+        public string SneakInText => new TextObject("{=1urm6Wwl}Sneak in").ToString();
 
         public void OnSneakIn()
         {

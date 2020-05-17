@@ -4,6 +4,7 @@ using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.Library;
+using TaleWorlds.Localization;
 
 namespace OsbarMods.Assassinate
 {
@@ -13,25 +14,25 @@ namespace OsbarMods.Assassinate
 
         private readonly Settlement _settlement;
 
-        private MBBindingList<SimpleCharacterPanelVM> _assassinationTargets;
+        private MBBindingList<AssassinationCharacterPanel> _assassinationTargets;
 
         public SettlementAssassinateScreenViewModel(ISneakInHandler sneakInHandler, Settlement settlement)
         {
             _sneakInHandler = sneakInHandler;
             _settlement = settlement;
 
-            var targetsList = new MBBindingList<SimpleCharacterPanelVM>();
+            var targetsList = new MBBindingList<AssassinationCharacterPanel>();
 
             foreach (var hero in settlement.GetViableAssassinationTargetsInLordsHall(Hero.MainHero))
             {
-                targetsList.Add(new SimpleCharacterPanelVM(hero, OnSneakIn));
+                targetsList.Add(new AssassinationCharacterPanel(hero, OnSneakIn));
             }
 
             AssassinationTargets = targetsList;
         }
 
         [DataSourceProperty]
-        public MBBindingList<SimpleCharacterPanelVM> AssassinationTargets
+        public MBBindingList<AssassinationCharacterPanel> AssassinationTargets
         {
             get
             {
@@ -48,13 +49,19 @@ namespace OsbarMods.Assassinate
         }
 
         [DataSourceProperty]
-        public string SneakInPercentageText
-        {
+        public string SneakInPercentageText {
             get
             {
-                return $"Sneak success chance: {(int)Math.Round(_sneakInHandler.GetSneakInChance(Hero.MainHero) * 100)}%";
+                var text = new TextObject("{=VCTZvhpm}Sneak success chance: {SNEAK_SUCCESS_PERCENT}%");
+
+                text.SetTextVariable("SNEAK_SUCCESS_PERCENT", (int)Math.Round(_sneakInHandler.GetSneakInChance(Hero.MainHero) * 100));
+
+                return text.ToString();
             }
         }
+
+        [DataSourceProperty]
+        public string LeaveText => new TextObject("{=3sRdGQou}Leave").ToString();
 
         private void OnSneakIn(Hero assassinationTarget)
         {

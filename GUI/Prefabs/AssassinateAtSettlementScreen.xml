@@ -30,7 +30,7 @@
                                                                 <TextWidget WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="130" Text="@NameText" />
                                                                 <ButtonWidget DoNotPassEventsToChildren="true" WidthSizePolicy="Fixed" HeightSizePolicy="Fixed" SuggestedWidth="80" SuggestedHeight="30" HorizontalAlignment="Center" VerticalAlignment="Top" MarginTop="160" MarginBottom="20" Brush="ButtonBrush1" Command.Click="OnSneakIn">
                                                                     <Children>
-                                                                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" Brush="CenterAlignedSmallFont" VerticalAlignment="Bottom" Text="Sneak in" />
+                                                                        <TextWidget WidthSizePolicy="StretchToParent" HeightSizePolicy="StretchToParent" HorizontalAlignment="Center" Brush="CenterAlignedSmallFont" VerticalAlignment="Bottom" Text="@SneakInText" />
                                                                     </Children>
                                                                 </ButtonWidget>
                                                             </Children>
@@ -55,7 +55,7 @@
                     </Children>
                 </Widget>
 
-                <Standard.DialogCloseButtons VisualDefinition="BottomMenu" Parameter.DoneButtonAction="OnCloseMenu" PositionYOffset="100" Parameter.DoneButtonText="Leave" Parameter.ShowCancel="false" />
+                <Standard.DialogCloseButtons VisualDefinition="BottomMenu" Parameter.DoneButtonAction="OnCloseMenu" PositionYOffset="100" Parameter.DoneButtonText="@LeaveText" Parameter.ShowCancel="false" />
             </Children>
         </Widget>
     </Window>

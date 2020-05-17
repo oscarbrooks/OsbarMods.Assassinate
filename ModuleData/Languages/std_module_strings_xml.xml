@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="English" />
+  </tags>
+  <strings>
+    <string id="RlEP2LMr" text="Assassinate..." />
+    <string id="1urm6Wwl" text="Sneak in" />
+    <string id="VCTZvhpm" text="Sneak success chance: {SNEAK_SUCCESS_PERCENT}%." />
+    <string id="5vbPC4NI" text="{VICTIM_NAME} has been assassinated." />
+    <string id="AqBsz5xT" text="{CAPTIVE_HERO_NAME} is being held prisoner at {SETTLEMENT_NAME}." />
+    <string id="L6Lg32mJ" text="You do not have enough gold to bribe the guards." />
+    <string id="pha7sFD9" text="The keep is on lockdown due to a recent assassination." />
+    <string id="Uh4ZsspU" text="The keep is on lockdown due to a recently attempted assassination." />
+    <!-- Dialogue -->
+    <!-- assassination noble convo -->
+    <string id="pUuxJPsj" text="{PLAYER_NAME}, I wasn't expecting to see you." />
+    <string id="VSNb0Fng" text="Who are you? I'm not expecting anyone right now." />
+    <string id="UlByid6B" text="I am here to kill you!" />
+    <string id="urBkJcfs" text="I must apologise, I have gotten lost. I'll be on my way. (Leave)" />
+    <string id="d6Y8pYjf" text="Hmm, very well then. I shall be having a word with my guards about their attentiveness." />
+    <!-- guards convo -->
+    <string id="cIL4bcTL" text="Halt! Who are you? It is forbidden to bring weapons into the keep." />
+    <string id="aaC7DDfK" text="I am here to put an end to {VICTIM_NAME}. Move aside or die!" />
+    <string id="3N7FUr35" text="Perhaps we can come to some sort of agreement... (Bribe {BRIBE_AMOUNT} gold)" />
+    <string id="a1tXDKmk" text="That's more like it. Make it quick, before I change my mind." />
+    <!-- captured convo -->
+    <string id="h1HEeHEk" text="You filthy rat. Did you really think you would get away with it? Everyone shall know of your cowardice and failure." />
+    <string id="2qCq9SXN" text="You should thank me for my mercy, for I'm only taking half of your wealth... Not that you'll need it when you're locked away in the dungeons." />
+    <!-- <string id="" text="" /> -->
+  </strings>
+</base>

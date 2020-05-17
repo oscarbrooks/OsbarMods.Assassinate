@@ -50,7 +50,7 @@ namespace OsbarMods.Assassinate
             campaignGameStarter.AddGameMenuOption(
                 "castle_outside",
                 AssassinateOutsideCastleOptionId,
-                "Assassinate...",
+                new TextObject("{=RlEP2LMr}Assassinate...").ToString(),
                 MenuCondition,
                 MenuConsequence,
                 false,
@@ -60,7 +60,7 @@ namespace OsbarMods.Assassinate
             campaignGameStarter.AddGameMenuOption(
                 "castle",
                 AssassinateCastleOptionId,
-                "Assassinate...",
+                new TextObject("{=RlEP2LMr}Assassinate...").ToString(),
                 MenuCondition,
                 MenuConsequence,
                 false,
@@ -70,7 +70,7 @@ namespace OsbarMods.Assassinate
             campaignGameStarter.AddGameMenuOption(
                 "town_keep_bribe",
                 AssassinateTownKeepBribeOptionId,
-                "Assassinate...",
+                new TextObject("{=RlEP2LMr}Assassinate...").ToString(),
                 MenuCondition,
                 MenuConsequence,
                 false,
@@ -80,7 +80,7 @@ namespace OsbarMods.Assassinate
             campaignGameStarter.AddGameMenuOption(
                 "town_keep",
                 AssassinateTownKeepOptionId,
-                "Assassinate...",
+                new TextObject("{=RlEP2LMr}Assassinate...").ToString(),
                 MenuCondition,
                 MenuConsequence,
                 false,
@@ -100,9 +100,11 @@ namespace OsbarMods.Assassinate
 
                 if (isLockedDown)
                 {
-                    var lockdownReason = settlementAssassinationHistory.LastAssassinationSuccessful ? "a recent assassination" : "a recently attempted assassination";
+                    var lockdownText = settlementAssassinationHistory.LastAssassinationSuccessful
+                        ? "{=pha7sFD9}The keep is on lockdown due to a recent assassination."
+                        : "{=Uh4ZsspU}The keep is on lockdown due to a recently attempted assassination.";
 
-                    args.Tooltip = new TextObject($"The keep is on lockdown due to {lockdownReason}.");
+                    args.Tooltip = new TextObject(lockdownText);
                 }
             }
 
