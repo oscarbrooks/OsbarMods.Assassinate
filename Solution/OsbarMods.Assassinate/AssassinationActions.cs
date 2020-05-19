@@ -12,6 +12,8 @@ namespace OsbarMods.Assassinate
     {
         private readonly IAssassinationHistoryService _assassinationHistoryService;
 
+        private const int MaximumGoldPenalty = 200000;
+
         public AssassinationActions(IAssassinationHistoryService assassinationHistoryService)
         {
             _assassinationHistoryService = assassinationHistoryService;
@@ -73,7 +75,14 @@ namespace OsbarMods.Assassinate
             });
         }
 
-        private void PrintAssassinatedText(Hero victim)
+        private static int CalculateGoldLoss(int initialGold, int maximumGoldLoss)
+        {
+            var rawGoldLoss = initialGold / 2;
+
+            return Math.Min(rawGoldLoss, maximumGoldLoss);
+        }
+
+        private static void PrintAssassinatedText(Hero victim)
         {
             var assassinatedText = new TextObject("{=5vbPC4NI}{VICTIM_NAME} has been assassinated.");
 
@@ -113,7 +122,7 @@ namespace OsbarMods.Assassinate
 
         private static void TakeGoldFromHero(Hero hero, Clan captorClan, out string goldLossMessage)
         {
-            var goldAmount = hero.Gold / 2;
+            var goldAmount = CalculateGoldLoss(hero.Gold, MaximumGoldPenalty);
 
             GiveGoldAction.ApplyBetweenCharacters(hero, captorClan.Leader, goldAmount, true);
 

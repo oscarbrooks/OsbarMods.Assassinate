@@ -57,8 +57,7 @@ namespace OsbarMods.Assassinate
         {
             var dialogFlow = DialogFlow
                 .CreateDialogFlow("start", int.MaxValue)
-                .NpcLine(new TextObject("{=h1HEeHEk}You filthy rat. Did you really think you would get away with it? Everyone shall know of your cowardice and failure."))
-                .NpcLine(new TextObject("{=2qCq9SXN}You should thank me for my mercy, for I'm only taking half of your wealth... Not that you'll need it when you're locked away in the dungeons."));
+                .NpcLine(new TextObject("{=h1HEeHEk}You filthy rat. Did you really think you would get away with it? Everyone shall know of your cowardice and failure."));
 
             return dialogFlow;
         }
